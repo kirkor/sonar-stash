@@ -39,12 +39,13 @@ public class StashRequestFacade implements BatchComponent {
     this.config = stashPluginConfiguration;
   }
   
-  public void setProjectBaseDirIfNotConfigured(File projectBaseDir) {
-    if (StringUtils.isEmpty(config.getBaseDir())) {
+  public void initialize(File projectBaseDir) {
+    if (config.getBaseDir() != null && !"".equals(config.getBaseDir()))
+    {
       this.projectBaseDir = projectBaseDir;
     }
-
-    if (StringUtils.isNotEmpty(config.getBaseDir())) {
+    else
+    {
       this.projectBaseDir = new File(config.getBaseDir());
     }
   }
